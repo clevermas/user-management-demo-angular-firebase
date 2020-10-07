@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { CONTACTS_COLLECTION } from '../core/contacts/contacts.collection';
 
 @Component({
   selector: 'app-contacts.container',
@@ -10,11 +10,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class ContactsContainerComponent implements OnInit {
 
-  contacts$ = this.firestore.collection('contacts').valueChanges();
+  contacts$ = this.firestore.collection(CONTACTS_COLLECTION).valueChanges();
 
-  auth$ = this.afAuth.authState;
-
-  constructor(private auth: AuthService, private firestore: AngularFirestore, private afAuth: AngularFireAuth) {
+  constructor(private auth: AuthService, private firestore: AngularFirestore) {
   }
 
   ngOnInit(): void {
