@@ -96,7 +96,6 @@ export class PaginationService {
       this.itemIndexCollection[pageIndex] = data.map(item => item[this.idField]);
     }
 
-    const remainder = this.total % this.pageSize;
     const isLastPage = this.pageIndex === Math.abs(this.total / this.pageSize) - 1;
     const isFirstTimeOrLastPage = (isFirstTime || isLastPage);
 
@@ -107,11 +106,6 @@ export class PaginationService {
 
     this.query = null;
     this.loading = false;
-
-    if (isLastPage && remainder && remainder !== data.length) {
-      this.total -= remainder;
-      this.total += data.length;
-    }
 
     if (data.length === this.pageSize && !isNextPage && isFirstTimeOrLastPage) {
       this.nextPageQuery$.next(data[data.length - 1].id);
