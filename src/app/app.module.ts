@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
@@ -16,18 +15,24 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContactsContainerComponent } from './contacts/contacts.container.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ContactsListComponent } from './contacts/list/contacts-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from './shared/shared.module';
+import { ContactsFilterComponent } from './contacts/filter/contacts-filter.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ContactsContainerComponent,
-    ContactsListComponent
+    ContactsListComponent,
+    ContactsFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,12 @@ import { SharedModule } from './shared/shared.module';
     MatButtonModule,
     MatInputModule,
     MatTableModule,
+    MatSelectModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatCardModule,
     ReactiveFormsModule,
     SharedModule
   ],

@@ -1,25 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/auth/auth.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, OnDestroy } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
+import { PaginationService } from '../core/pagination/pagination.service';
 import { CONTACTS_COLLECTION } from '../core/contacts/contacts.collection';
 
 @Component({
   selector: 'app-contacts.container',
   templateUrl: './contacts.container.component.html',
-  styleUrls: ['./contacts.container.component.scss']
+  styleUrls: ['./contacts.container.component.scss'],
+  providers: [PaginationService]
 })
-export class ContactsContainerComponent implements OnInit {
+export class ContactsContainerComponent implements OnDestroy {
+  roles = [{label: 'Admin', value: 'admin'}, {label: 'User', value: 'user'}];
 
-  contacts$ = this.firestore.collection(CONTACTS_COLLECTION).valueChanges();
+  filteringState = {role: '', birthDate: null};
 
-  constructor(private auth: AuthService, private firestore: AngularFirestore) {
+  pagination$ = new BehaviorSubject(0);
+  filtering$ = new BehaviorSubject('');
+
+  contacts$ = combineLatest([this.pagination$, this.filtering$, this.pagination.emergency$]).pipe(
+    switchMap(([pagination, _]) => this.pagination.data(pagination)));
+
+  filteringHook = (query) => {
+    const {role, birthDate} = this.filteringState;
+    if (role) {
+      query = query.where('role', '==', role);
+    }
+    if (birthDate) {
+      query = query.where('birthDate', '==', new Date(birthDate).getTime());
+    }
+
+    return query;
   }
 
-  ngOnInit(): void {
+  constructor(public pagination: PaginationService) {
+    pagination.firestoreCollection = CONTACTS_COLLECTION;
+    pagination.idField = 'id';
+    pagination.orderBy = 'email';
+    pagination.dataQueryHooks.push(this.filteringHook);
   }
 
-  logout() {
-    this.auth.logout();
+  onPageChange(e: PageEvent) {
+    this.pagination$.next(e.pageIndex);
+  }
+
+  onFilterChange(filters) {
+    this.filteringState = filters;
+    this.pagination.clear();
+    this.filtering$.next('');
+  }
+
+  ngOnDestroy(): void {
+    this.pagination.destroyed$.next('');
+    this.pagination.destroyed$.complete();
   }
 
 }

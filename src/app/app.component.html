@@ -1,3 +1,11 @@
-<main class="mat-typography" fxFlex="grow" fxFlex.lg="60" fxFlexOffset.lg="20">
-  <router-outlet></router-outlet>
+<nav *ngIf="auth.isLoggedIn && !(auth.processing$ | async)">
+  <button mat-icon-button (click)="auth.logout()">
+    <mat-icon>login</mat-icon>
+  </button>
+</nav>
+
+<main class="mat-typography">
+  <div fxFlex="grow" fxFlex.lg="60" fxFlexOffset.lg="20">
+    <router-outlet></router-outlet>
+  </div>
 </main>

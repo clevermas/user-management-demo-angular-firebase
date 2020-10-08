@@ -32,6 +32,7 @@ export class AuthService {
     try {
       this.processing$.next(true);
       await this.auth.signInWithEmailAndPassword(email, password);
+      this.processing$.next(false);
     } catch (e) {
       this.error$.next(e.message);
       this.processing$.next(false);

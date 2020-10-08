@@ -1,8 +1,8 @@
 export interface ContactModel {
   email: string;
-  role: 'admin' | 'user';
+  role: '' | 'admin' | 'user';
   phone: string;
   firstName: string;
   lastName: string;
-  birthDate: number;
+  birthDate: '' | number;
 }
