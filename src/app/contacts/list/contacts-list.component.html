@@ -14,11 +14,11 @@
           <td mat-cell *matCellDef="let element"> {{element.role}} </td>
         </ng-container>
 
-        <!-- Birth Date Column -->
-        <ng-container matColumnDef="birthDate">
-          <th mat-header-cell *matHeaderCellDef> Birth Date</th>
-          <td mat-cell *matCellDef="let element"> {{element.birthDate | date : 'MM/dd/yyyy'}} </td>
-        </ng-container>
+    <!-- Birth Date Column -->
+    <ng-container matColumnDef="birthDate">
+      <th mat-header-cell *matHeaderCellDef> Birth Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.birthDate | date : 'MM/dd/yyyy'}} </td>
+    </ng-container>
 
         <!-- First Name Column -->
         <ng-container matColumnDef="firstName">
