@@ -20,9 +20,7 @@
         <input matInput type="password" formControlName="password">
       </mat-form-field>
 
-      <div fxLayoutAlign="center" *ngIf="processing$ | async">
-        <mat-spinner color="primary" [diameter]="32"></mat-spinner>
-      </div>
+      <app-spinner *ngIf="processing$ | async"></app-spinner>
 
       <mat-error>{{loginError$ | async}}</mat-error>
 

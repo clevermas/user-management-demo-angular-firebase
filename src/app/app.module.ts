@@ -18,12 +18,16 @@ import { ContactsContainerComponent } from './contacts/contacts.container.compon
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ContactsListComponent } from './contacts/list/contacts-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ContactsContainerComponent
+    ContactsContainerComponent,
+    ContactsListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +41,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    ReactiveFormsModule
+    MatTableModule,
+    ReactiveFormsModule,
+    SharedModule
   ],
   bootstrap: [AppComponent]
 })
