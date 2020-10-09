@@ -4,8 +4,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { PaginationService } from '../core/pagination/pagination.service';
-import { CONTACTS_COLLECTION } from '../core/contacts/contacts.collection';
+import { PaginationService } from '@core/pagination/pagination.service';
+import { CONTACTS_COLLECTION } from '@core/contacts/contacts-collection';
+import { ContactsCreateDialogService } from '@app/contacts/create-dialog/contacts-create-dialog.service';
+import { CONTACTS_ROLES } from '@core/contacts/contacts-roles';
 
 @Component({
   selector: 'app-contacts.container',
@@ -14,7 +16,7 @@ import { CONTACTS_COLLECTION } from '../core/contacts/contacts.collection';
   providers: [PaginationService]
 })
 export class ContactsContainerComponent implements OnDestroy {
-  roles = [{label: 'Admin', value: 'admin'}, {label: 'User', value: 'user'}];
+  roles = CONTACTS_ROLES;
 
   filteringState = {role: '', birthDate: null};
 
@@ -36,7 +38,7 @@ export class ContactsContainerComponent implements OnDestroy {
     return query;
   }
 
-  constructor(public pagination: PaginationService) {
+  constructor(public pagination: PaginationService, public createDialog: ContactsCreateDialogService) {
     pagination.firestoreCollection = CONTACTS_COLLECTION;
     pagination.idField = 'id';
     pagination.orderBy = 'email';

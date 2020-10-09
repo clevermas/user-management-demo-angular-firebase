@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { DynamicFormModule } from '@shared/dynamic-form/dynamic-form.module';
 
 
 @NgModule({
@@ -11,8 +11,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DynamicFormModule
   ],
-  exports: [SpinnerComponent]
+  exports: [
+    SpinnerComponent,
+    DynamicFormModule
+  ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

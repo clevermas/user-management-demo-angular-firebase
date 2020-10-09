@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Create Contact</h2>
+<mat-dialog-content>
+  <app-dynamic-form [controls]="data.filterForm" [layout]="layout"></app-dynamic-form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <mat-error class="mat-typography">{{error}}</mat-error>
+  <app-spinner class="spinner" *ngIf="loading$ | async"></app-spinner>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button (click)="clear()" class="ml-2">Clear</button>
+  <button mat-raised-button color="primary" [disabled]="loading$ | async" (click)="create()">Create</button>
+</mat-dialog-actions>

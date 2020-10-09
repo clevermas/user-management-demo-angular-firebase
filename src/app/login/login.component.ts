@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   loginError$ = this.auth.error$;
-  processing$ = this.auth.processing$;
+  loading$ = this.auth.loading$;
 
   constructor(private fb: FormBuilder, private auth: AuthService) { }
 
