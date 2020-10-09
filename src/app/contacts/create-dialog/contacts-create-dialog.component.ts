@@ -34,6 +34,10 @@ export class ContactsCreateDialogComponent {
   }
 
   async create() {
+    if (!this.form.dynamicForm.valid) {
+      return;
+    }
+
     const data: ContactModel = {...this.form.dynamicForm.value};
     data.birthDate = (data.birthDate as Date).getTime();
 

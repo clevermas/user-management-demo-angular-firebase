@@ -19,48 +19,41 @@ export class ContactsCreateDialogService {
           id: 'email',
           label: 'Email',
           validators: [Validators.email],
-          required: true,
-          value: 'test4@gmail.com'
+          required: true
         },
         {
           id: 'role',
           label: 'Role',
           type: 'select',
           options: CONTACTS_ROLES,
-          required: true,
-          value: 'user'
+          required: true
         },
         {
           id: 'password',
           label: 'Password',
           type: 'password',
-          required: true,
-          value: 'changeme'
+          required: true
         },
         {
           id: 'phone',
           label: 'Phone',
-          required: true,
-          value: '+385555555555'
+          required: true
         },
         {
           id: 'firstName',
           label: 'First Name',
-          required: true,
-          value: 'John'
+          required: true
         },
         {
           id: 'lastName',
           label: 'Last Name',
-          required: true,
-          value: 'Doe'
+          required: true
         },
         {
           id: 'birthDate',
           label: 'Birth Date',
           type: 'date',
-          required: true,
-          value: new Date('09/11/1992')
+          required: true
         }
       ]
     }
