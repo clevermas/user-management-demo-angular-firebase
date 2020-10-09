@@ -1,0 +1,18 @@
+<section>
+  <h1>Contacts</h1>
+
+  <div *ngIf="contacts$ | async; else loading" fxLayoutGap="10px" fxLayout="column">
+    <mat-card *ngFor="let contact of contacts$ | async"
+              fxLayout="row" fxLayoutAlign="space-between stretch">
+      <div>{{contact.email}}</div>
+      <div>{{contact.role}}</div>
+    </mat-card>
+  </div>
+  <ng-template #loading>
+    <div fxLayoutAlign="center">
+      <mat-spinner color="primary" [diameter]="32"></mat-spinner>
+    </div>
+  </ng-template>
+
+  <button mat-raised-button (click)="logout()">Logout</button>
+</section>

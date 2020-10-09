@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: 'user-management-demo-app.appspot.com',
     messagingSenderId: '933885619586',
     appId: '1:933885619586:web:4a5baaad2be3124ee6739b'
-  }
+  },
+  api: 'https://us-central1-user-management-demo-app.cloudfunctions.net/api'
 };
 
 /*
