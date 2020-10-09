@@ -1,7 +1,12 @@
 <section>
   <h1>Contacts</h1>
 
-  <app-contacts-list [items]="contacts$ | async"></app-contacts-list>
+  <app-contacts-filter [roles]="roles" (filterChange)="onFilterChange($event)"></app-contacts-filter>
 
-  <button mat-raised-button (click)="logout()">Logout</button>
+  <app-contacts-list [items]="contacts$ | async"
+                     [total]="pagination.total"
+                     [pageSize]="pagination.pageSize"
+                     [pageIndex]="pagination.pageIndex"
+                     [loading]="pagination.loading"
+                     (pageChange)="onPageChange($event)"></app-contacts-list>
 </section>

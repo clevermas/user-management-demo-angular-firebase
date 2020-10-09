@@ -1,0 +1,19 @@
+<form [formGroup]="filterForm" fxLayoutGap="1em" fxLayoutAlign="end center">
+<!--  Role Field-->
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="role">
+      <mat-option *ngFor="let role of roles" [value]="role?.value">
+        {{role?.label}}
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix (click)="clearRole($event)" *ngIf="filterForm.get('role').value">clear</mat-icon>
+  </mat-form-field>
+<!--  Birth Date Field-->
+  <mat-form-field>
+    <mat-label>Birth Date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="birthDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</form>

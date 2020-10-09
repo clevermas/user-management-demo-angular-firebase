@@ -13,7 +13,7 @@ export const createContactTrigger = functions.firestore
         firstName: 'John',
         lastName: 'Doe',
         phone: '+385555555555',
-        birthDate: new Date('09/11/1993')
+        birthDate: 747694800000
       });
 
       const {uid} = await admin.auth().createUser({
