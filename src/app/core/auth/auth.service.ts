@@ -9,9 +9,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   user: User;
+  token;
 
   error$ = new BehaviorSubject('');
-  processing$ = new BehaviorSubject(false);
+  loading$ = new BehaviorSubject(false);
 
   constructor(private auth: AngularFireAuth, public router: Router) {
     auth.authState.subscribe(this.authStateHandler);
@@ -26,16 +27,18 @@ export class AuthService {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     }
+    this.user = user;
+    this.token = await user.getIdToken();
   }
 
   async login(email: string, password: string) {
     try {
-      this.processing$.next(true);
+      this.loading$.next(true);
       await this.auth.signInWithEmailAndPassword(email, password);
-      this.processing$.next(false);
+      this.loading$.next(false);
     } catch (e) {
       this.error$.next(e.message);
-      this.processing$.next(false);
+      this.loading$.next(false);
     }
   }
 

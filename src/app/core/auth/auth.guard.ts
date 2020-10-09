@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
         } else {
           this.auth.logout();
           this.auth.error$.next('You don\'t have permissions to log in');
-          this.auth.processing$.next(false);
+          this.auth.loading$.next(false);
         }
       })
     );

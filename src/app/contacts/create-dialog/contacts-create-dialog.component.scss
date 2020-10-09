@@ -1,0 +1,14 @@
+.mat-dialog-actions {
+  position: relative;
+  .spinner {
+    position: absolute;
+    left: 0;
+  }
+  .mat-error {
+    margin-bottom: 1em;
+    padding-right: .5em;
+    text-align: left;
+    flex-basis: 40%;
+    flex-grow: 1;
+  }
+}

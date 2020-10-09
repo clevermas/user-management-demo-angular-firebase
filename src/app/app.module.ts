@@ -14,10 +14,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContactsContainerComponent } from './contacts/contacts.container.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ContactsListComponent } from './contacts/list/contacts-list.component';
 import { MatTableModule } from '@angular/material/table';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ContactsFilterComponent } from './contacts/filter/contacts-filter.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +25,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
+import { ContactsCreateDialogComponent } from './contacts/create-dialog/contacts-create-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthInterceptor } from '@core/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { MatCardModule } from '@angular/material/card';
     LoginComponent,
     ContactsContainerComponent,
     ContactsListComponent,
-    ContactsFilterComponent
+    ContactsFilterComponent,
+    ContactsCreateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +57,16 @@ import { MatCardModule } from '@angular/material/card';
     MatNativeDateModule,
     MatPaginatorModule,
     MatCardModule,
+    MatDialogModule,
     ReactiveFormsModule,
     SharedModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

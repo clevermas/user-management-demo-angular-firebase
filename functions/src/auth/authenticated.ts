@@ -1,20 +1,22 @@
 import { Request, Response } from 'express';
 import * as admin from 'firebase-admin';
+import { handleError } from '../utils';
 
 export async function isAuthenticated(req: Request, res: Response, next: () => void) {
   const {authorization} = req.headers;
+  const errorMsg = {code: 401, message: 'Unauthorized'};
 
   if (!authorization) {
-    return res.status(401).send({message: 'Unauthorized'});
+    return handleError(res, errorMsg);
   }
 
   if (!authorization.startsWith('Bearer')) {
-    return res.status(401).send({message: 'Unauthorized'});
+    return handleError(res, errorMsg);
   }
 
   const split = authorization.split('Bearer ');
   if (split.length !== 2) {
-    return res.status(401).send({message: 'Unauthorized'});
+    return handleError(res, errorMsg);
   }
 
   const token = split[1];
@@ -24,7 +26,6 @@ export async function isAuthenticated(req: Request, res: Response, next: () => v
     res.locals = {...res.locals, uid: decodedToken.uid, role: decodedToken.role, email: decodedToken.email};
     return next();
   } catch (err) {
-    console.error(`${err.code} -  ${err.message}`);
-    return res.status(401).send({message: 'Unauthorized'});
+    return handleError(res, errorMsg);
   }
 }

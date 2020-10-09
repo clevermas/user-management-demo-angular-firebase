@@ -1,12 +1,16 @@
 <section>
   <h1>Contacts</h1>
 
-  <app-contacts-filter [roles]="roles" (filterChange)="onFilterChange($event)"></app-contacts-filter>
+  <mat-card>
+    <app-contacts-filter [roles]="roles" (filterChange)="onFilterChange($event)"></app-contacts-filter>
 
-  <app-contacts-list [items]="contacts$ | async"
-                     [total]="pagination.total"
-                     [pageSize]="pagination.pageSize"
-                     [pageIndex]="pagination.pageIndex"
-                     [loading]="pagination.loading"
-                     (pageChange)="onPageChange($event)"></app-contacts-list>
+    <app-contacts-list [items]="contacts$ | async"
+                       [total]="pagination.total"
+                       [pageSize]="pagination.pageSize"
+                       [pageIndex]="pagination.pageIndex"
+                       [loading]="pagination.loading"
+                       (pageChange)="onPageChange($event)"></app-contacts-list>
+
+    <button mat-raised-button color="primary" (click)="createDialog.open()">Create</button>
+  </mat-card>
 </section>
